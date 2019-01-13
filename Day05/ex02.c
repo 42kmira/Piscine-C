@@ -23,7 +23,7 @@ int     ft_atoi(char *str)
     int result;
     int sign;
 
-    while (char_is_whitespace(*str++));
+    while (char_is_whitespace(*str) && str++);
     sign = 1;
     if (char_is_sign(*str, &sign))
         str++;

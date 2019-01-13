@@ -1,10 +1,3 @@
-int     char_is_alpha(char c)
-{
-    if (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z'))
-        return (1);
-    return (0);
-}
-
 int     char_is_alphanumeric(char c)
 {
     if (char_is_alpha(c) || (('0' <= c && c <= '9')))
