@@ -5,6 +5,7 @@
 #include "../../Libraries/random/rand.c"
 
 #include <unistd.h>
+#include <string.h>
 
 #include "prologue-Day05.h"
 
@@ -77,23 +78,108 @@ void    test_04_helper(char *input)
 
 void    test_ex04()
 {
-    srand(time(0));
     str_attack((void *)test_04_helper, "void");
 }
 
 void    test_ex05()
 {
-    //Test case is more involved.
+    #define test05_size 16
+    char *test[test05_size * 2] = {
+        "SEEK",     "SEARCH_SPACE",
+        "o\0",      "o\0",
+        "o\0",      "xox\0",
+        "o\0",      "xxo\0",
+        "abc\0",    "abc\0",
+        "abc\0",    " abc\0",
+        "abc\0",    "zzyyxxww\0",
+        "abc\0",    "zzabyabc\0",
+        "abc\0",    "zzabcyabc\0",
+        "abc\0",    "zzabyyab\0",
+        "abac\0",   "abadabafabagabacabagabac\0",
+        "\0",       "a\0",
+        "\0",       "xxoxxo\0",
+        "abcde\0",  "abc\0",
+        "abc\0",    "\0",
+        "\0",       "\0s"
+    };
+
+    int i;
+    char *seek;
+    char *search_space;
+    i = 2;
+    while (i < test05_size * 2)
+    {
+        seek = test[i];
+        search_space = test[i + 1];
+        printf("Seeking: \'%s\' in \'%s\'\n", seek, search_space);
+        printf("Result:\t\'%s\'\t",  ft_strstr(search_space, seek));
+        printf("Expected: \t\'%s\'\n\n", strstr(search_space, seek));
+        i = i + 2;
+    }
 }
 
 void    test_ex06()
 {
+    printf("There are different implentations of strcmp. Some will give three return values (-1, 0, 1)\n");
+    printf("Others will give you the ASCII difference. All that is guaranteed is 0 and the correct\n");
+    printf("direction of difference (positive or negative)\n\n");
 
+    #define test06_size 9
+    char *test[test06_size * 2] = {
+        "1\0",      "1\0",
+        "321\0",    "321\0",
+        "3210\0",   "3214\0",
+        "301\0",    "321\0",
+        "021\0",    "321\0",
+        "321\0",    "3210\0",
+        "3210\0",   "321\0",
+        "\0",       "21\0",
+        "321\0",    "\0"
+    };
+
+    int i;
+    char *src1;
+    char *src2;
+    i = 0;
+    while (i < test06_size * 2)
+    {
+        src1 = test[i];
+        src2 = test[i + 1];
+        printf("Comparing: \'%s\' and \'%s\'\n", src1, src2);
+        printf("Result:\t%d\t", ft_strcmp(src1, src2));
+        printf("Expected: \t%d\n\n", strcmp(src1, src2));
+        i = i + 2;
+    }
 }
 
 void    test_ex07()
 {
+    #define test07_size 13
+    char *test[test07_size * 3] = {
+        "1\0",      "1\0",      "2",
+        "321\0",    "321\0",    "4",
+        "3210\0",   "3214\0",   "5",
+        "301\0",    "321\0",    "4",
+        "021\0",    "321\0",    "4",
+        "321\0",    "3210\0",   "5",
+        "3210\0",   "321\0",    "5",
+        "\0",       "21\0",     "3",
+        "321\0",    "\0",       "4",
+        "\0",       "\0",       "0",
+        "1\0",      "1\0",      "0",
+        "12\0",     "10\0",     "1",
+        "12\0",     "10\0",     "2"
+    };
 
+    int i;
+    i = 0;
+    while (i < test07_size * 3)
+    {
+        printf("Comparing: \'%s\' and \'%s\' with n: %d\n", test[i], test[i + 1], *test[i + 2] - '0');
+        printf("Result:\t%d\t", ft_strncmp(test[i], test[i + 1], (*test[i + 2] - '0')));
+        printf("Expected: \t%d\n\n", strncmp(test[i], test[i + 1], (*test[i + 2] - '0')));
+        i = i + 3;
+    }
 }
 
 void    test_ex08()
