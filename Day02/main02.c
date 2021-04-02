@@ -21,7 +21,7 @@
  *
 ****************************************************************/
 
-#include "backstage.h";
+#include "backstage.h"
 
 int main(void)
 {
